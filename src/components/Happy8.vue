@@ -78,26 +78,50 @@ onMounted(() => {
   reset()
 })
 
+function getArr(arr) {
+    return Array.from(new Set(arr))
+}
+
+function callBack(type) {
+  let array = []
+  for (let i = 0; i < type; i++) {
+    const randomIndex = Math.floor(Math.random() * num.value.length);
+
+    array.push(num.value[randomIndex])
+  }
+
+  array = getArr(array)
+
+  console.log('type', array.length, type);
+
+  if (array.length !== type) {
+    callBack(type)
+  }
+
+  return array
+}
+
 function roll() {
   // alert('所有号码已选完，请重置！');
 
   isRolling.value = true;
   currentStudent.value = null;
   // 播放选择开始音效
-  const startSound = new Audio('https://www.soundjay.com/button/beep-07.wav');
-  startSound.play();
+  // const startSound = new Audio('https://www.soundjay.com/button/beep-07.wav');
+  // startSound.play();
 
-  setTimeout(() => {
-    let array = []
-    for (let i = 0; i < type.value; i++) {
-      const randomIndex = Math.floor(Math.random() * num.value.length);
-      console.log('好家伙', randomIndex);
-      
-      array.push(num.value[randomIndex])
-      array.sort(function(a, b) {
-          return a - b; // 升序排序
-      });
-    }
+  setTimeout(() => {    
+    // let array = []
+    // for (let i = 0; i < type.value; i++) {
+    //   const randomIndex = Math.floor(Math.random() * num.value.length);
+
+    //   array.push(num.value[randomIndex])
+    // }
+    let array = callBack(type.value)
+    array.sort(function(a, b) {
+        return a - b; // 升序排序
+    });
+
     array.forEach((item) => {
       if (currentStudent.value) {
         currentStudent.value = currentStudent.value + ' ' + item;
@@ -111,8 +135,8 @@ function roll() {
     localStorage.setItem('historyList', JSON.stringify(historyList.value));
     isRolling.value = false;
     // 播放选择结束音效
-    const endSound = new Audio('https://www.soundjay.com/button/beep-06.wav');
-    endSound.play();
+    // const endSound = new Audio('https://www.soundjay.com/button/beep-06.wav');
+    // endSound.play();
   }, 800);
 }
 function reset() {
