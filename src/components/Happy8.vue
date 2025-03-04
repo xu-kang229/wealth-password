@@ -57,7 +57,7 @@
   </Confirm>
 
   <!-- <audio ref="musicAudio" src="../assets/双手插兜.mp3" autoplay loop></audio> -->
-  <audio ref="musicAudio">
+  <audio ref="musicAudio" loop>
     <source src="../assets/双手插兜.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
