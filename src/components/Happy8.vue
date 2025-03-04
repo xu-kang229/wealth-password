@@ -51,10 +51,23 @@
       </div>
     </div>
   </div>
+
+  <Confirm :visible="confirmVisible" @close="confirmVisible = false" @confirm="confirm">
+    <span>开启带劲的 mussic 吗?</span>
+  </Confirm>
+
+  <!-- <audio ref="musicAudio" src="../assets/双手插兜.mp3" autoplay loop></audio> -->
+  <audio ref="musicAudio">
+    <source src="../assets/双手插兜.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import Confirm from '../components/Confirm.vue'
+
+const musicAudio = ref()
 
 const num = ref([
   "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
@@ -73,6 +86,7 @@ const selectedList = ref([])
 const isRolling = ref(false)
 const historyList = ref(JSON.parse(localStorage.getItem('historyList')) || [])
 const historyVisible = ref(false)
+const confirmVisible = ref(true)
 
 onMounted(() => {
   reset()
@@ -95,7 +109,7 @@ function callBack(type) {
   console.log('type', array.length, type);
 
   if (array.length !== type) {
-    callBack(type)
+    return callBack(type)
   }
 
   return array
@@ -106,17 +120,8 @@ function roll() {
 
   isRolling.value = true;
   currentStudent.value = null;
-  // 播放选择开始音效
-  // const startSound = new Audio('https://www.soundjay.com/button/beep-07.wav');
-  // startSound.play();
 
   setTimeout(() => {    
-    // let array = []
-    // for (let i = 0; i < type.value; i++) {
-    //   const randomIndex = Math.floor(Math.random() * num.value.length);
-
-    //   array.push(num.value[randomIndex])
-    // }
     let array = callBack(type.value)
     array.sort(function(a, b) {
         return a - b; // 升序排序
@@ -156,6 +161,12 @@ function showHistory() {
 }
 function closeDialog() {
   historyVisible.value = false
+}
+
+// 播放音乐
+function confirm() {
+  musicAudio.value.play();
+  confirmVisible.value = false
 }
 </script>
 
@@ -339,17 +350,18 @@ button:disabled {
   line-height: 30px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: rgb(255, 255, 0);
 }
 
 .selected {
-  background-color: rgba(255, 255, 0, 0.6);
+  background-color: rgba(231, 76, 60, 0.9);
 }
 
 .type {
-  padding: 18px 6px;
+  padding: 18px 4px;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .type button {

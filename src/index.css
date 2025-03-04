@@ -1,0 +1,55 @@
+button {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.8;
+  color: #aaa;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.action-blue {
+  background-color: #3498db;
+  color: white;
+}
+
+.action-red {
+  background-color: #e74c3c;
+  color: white;
+}
+
+        button {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .action-blue {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .action-red {
+            background-color: #e74c3c;
+            color: white;
+        }
