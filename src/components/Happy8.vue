@@ -326,7 +326,7 @@ button:disabled {
 .history .dialog .item-list {
   width: 100%;
   height: 100%;
-  padding-top: 40px;
+  padding-top: 52px;
   /* 内容超出可滑动 */
   overflow: scroll;
 }
